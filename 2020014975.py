@@ -111,19 +111,14 @@ def write_result_file(path, header, data, predictions, label_names):
 def main():
     train_path, test_path, result_path = sys.argv[1], sys.argv[2], sys.argv[3]
 
-    # 훈련 데이터 로드
     train_header, X_train, y_train, label_names = read_train_file(train_path)
 
-    # 테스트 데이터 로드
     test_header, X_test = read_test_file(test_path)
 
-    # 결정 트리 학습
     tree = build_tree(X_train, y_train)
 
-    # 예측
     predictions = [predict(tree, row) for row in X_test]
 
-    # 결과 저장
     write_result_file(result_path, test_header + [train_header[-1]], X_test, predictions, label_names)
 
 if __name__ == "__main__":
